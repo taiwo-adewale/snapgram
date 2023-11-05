@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
-import { Button } from "@/components/ui";
+import { Button, useToast } from "@/components/ui";
 import { Loader, GridPostList, PostStats } from "@/components/shared";
 
 import {
@@ -13,14 +14,25 @@ import { useUserContext } from "@/context/AuthContext";
 
 const PostDetails = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const { id } = useParams();
   const { user } = useUserContext();
 
-  const { data: post, isPending } = useGetPostById(id);
+  const { data: post, isPending, error } = useGetPostById(id);
   const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
     post?.creator.$id
   );
-  const { mutate: deletePost } = useDeletePost();
+  const { mutate: deletePost, error: wale } = useDeletePost();
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Post not found",
+      });
+
+      setTimeout(() => navigate(-1), 1000);
+    }
+  }, [error]);
 
   const relatedPosts = userPosts?.documents.filter(
     (userPost) => userPost.$id !== id
@@ -28,8 +40,10 @@ const PostDetails = () => {
 
   const handleDeletePost = () => {
     deletePost({ postId: id, imageId: post?.imageId });
-    navigate(-1);
+    // navigate(-1);
   };
+
+  console.log(wale);
 
   return (
     <div className="post_details-container">

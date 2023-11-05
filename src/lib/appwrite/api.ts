@@ -225,7 +225,7 @@ export async function searchPosts(searchTerm: string) {
   }
 }
 
-export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
+export async function getInfinitePosts(pageParam: string) {
   // eslint-disable-next-line
   const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(9)];
 
@@ -259,11 +259,14 @@ export async function getPostById(postId?: string) {
       postId
     );
 
-    if (!post) throw Error;
+    if (!post) {
+      throw Error;
+    }
 
     return post;
   } catch (error) {
     console.log(error);
+    throw Error;
   }
 }
 

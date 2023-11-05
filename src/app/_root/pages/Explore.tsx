@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Models } from "appwrite";
 import { useInView } from "react-intersection-observer";
 
 import { Input } from "@/components/ui";
@@ -8,7 +9,11 @@ import { useGetPosts, useSearchPosts } from "@/lib/react-query/queries";
 
 export type SearchResultProps = {
   isSearchFetching: boolean;
-  searchedPosts: any;
+  searchedPosts:
+    | {
+        documents: Models.Document[];
+      }
+    | undefined;
 };
 
 const SearchResults = ({
@@ -17,7 +22,7 @@ const SearchResults = ({
 }: SearchResultProps) => {
   if (isSearchFetching) {
     return <Loader />;
-  } else if (searchedPosts && searchedPosts.documents.length > 0) {
+  } else if (searchedPosts?.documents && searchedPosts.documents.length > 0) {
     return <GridPostList posts={searchedPosts.documents} />;
   } else {
     return (
@@ -51,7 +56,12 @@ const Explore = () => {
   const shouldShowSearchResults = searchValue !== "";
   const shouldShowPosts =
     !shouldShowSearchResults &&
-    posts.pages.every((item) => item.documents.length === 0);
+    posts.pages.every((item) => item?.documents.length === 0);
+
+  const flattenedInfinitePosts = posts.pages
+    .filter((page) => page?.documents[0])
+    .map((page) => page!.documents)
+    .reduce((acc, curr) => acc.concat(curr), []);
 
   return (
     <div className="explore-container">
@@ -100,9 +110,7 @@ const Explore = () => {
         ) : shouldShowPosts ? (
           <p className="text-light-4 mt-10 text-center w-full">End of posts</p>
         ) : (
-          posts.pages.map((item, index) => (
-            <GridPostList key={`page-${index}`} posts={item.documents} />
-          ))
+          <GridPostList posts={flattenedInfinitePosts} />
         )}
       </div>
 

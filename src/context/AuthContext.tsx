@@ -41,8 +41,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAuthUser = async () => {
     setIsLoading(true);
+
     try {
       const currentAccount = await getCurrentUser();
+
       if (currentAccount) {
         setUser({
           id: currentAccount.$id,
@@ -52,6 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           imageUrl: currentAccount.imageUrl,
           bio: currentAccount.bio,
         });
+
         setIsAuthenticated(true);
 
         return true;
@@ -67,14 +70,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    // const cookieFallback = localStorage.getItem("cookieFallback");
-    // if (
-    //   cookieFallback === "[]" ||
-    //   cookieFallback === null ||
-    //   cookieFallback === undefined
-    // ) {
-    //   navigate("/sign-in");
-    // }
+    const cookieFallback = localStorage.getItem("cookieFallback");
+    if (
+      cookieFallback === "[]" ||
+      cookieFallback === null ||
+      cookieFallback === undefined
+    ) {
+      navigate("/sign-in");
+    }
 
     checkAuthUser();
   }, []);

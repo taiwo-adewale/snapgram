@@ -10,6 +10,7 @@ import {
   PostDetails,
   UpdateProfile,
   AllUsers,
+  PageNotFound,
 } from "@/app/_root/pages";
 import AuthLayout from "@/app/_auth/AuthLayout";
 import RootLayout from "@/app/_root/RootLayout";
@@ -21,7 +22,7 @@ import "@/globals.css";
 
 const App = () => {
   return (
-    <main className="flex h-screen">
+    <main className="flex h-screen w-full overflow-hidden">
       <Routes>
         {/* public routes */}
         <Route element={<AuthLayout />}>
@@ -40,7 +41,7 @@ const App = () => {
           <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/profile/:id/*" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
 
