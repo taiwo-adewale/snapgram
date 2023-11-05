@@ -22,7 +22,7 @@ import "@/globals.css";
 
 const App = () => {
   return (
-    <main className="flex h-screen w-full overflow-hidden">
+    <div>
       <Routes>
         {/* public routes */}
         <Route element={<AuthLayout />}>
@@ -46,7 +46,7 @@ const App = () => {
       </Routes>
 
       <Toaster />
-    </main>
+    </div>
   );
 };
 
