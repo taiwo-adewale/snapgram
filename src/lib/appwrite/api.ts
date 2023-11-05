@@ -227,7 +227,7 @@ export async function searchPosts(searchTerm: string) {
 
 export async function getInfinitePosts(pageParam: string) {
   // eslint-disable-next-line
-  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(9)];
+  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(6)];
 
   if (pageParam) {
     queries.push(Query.cursorAfter(pageParam.toString()));
