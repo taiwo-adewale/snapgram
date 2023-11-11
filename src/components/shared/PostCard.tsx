@@ -1,15 +1,19 @@
+import { useState } from "react";
 import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 
 import { PostStats } from "@/components/shared";
 import { multiFormatDateString } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
+import { cn } from "@/lib/utils";
 
 type PostCardProps = {
   post: Models.Document;
 };
 
 const PostCard = ({ post }: PostCardProps) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   const { user } = useUserContext();
 
   if (!post.creator) return;
@@ -70,10 +74,20 @@ const PostCard = ({ post }: PostCardProps) => {
         </div>
 
         <img
-          src={post.imageUrl || "/assets/icons/profile-placeholder.svg"}
+          src={post.imageUrl}
           alt="post image"
-          className="post-card_img"
+          className={cn("post-card_img", isImageLoaded ? "block" : "hidden")}
+          onLoad={() => setIsImageLoaded(true)}
         />
+
+        <div
+          className={cn(
+            "post-card_img flex justify-center items-center bg-gray-500",
+            isImageLoaded ? "hidden" : "flex"
+          )}
+        >
+          <div className="relative mx-auto border-4 rounded-full border-white/20 border-l-white animate-spinLoader w-8 h-8" />
+        </div>
       </Link>
 
       <PostStats post={post} userId={user.id} />
