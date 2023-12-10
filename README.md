@@ -1,27 +1,70 @@
-# React + TypeScript + Vite
+# Snapgram
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The snapgram is a tool designed specifically for managing an online store's essentials: products, orders, and customers. It's all about making life simpler for admins, helping them get things done smoothly and efficiently.
 
-Currently, two official plugins are available:
+## Table of contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Contribution](#contribution)
+- [Contact](#contact)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Authentication:** Secure user authentication for seamless access.
+- **Home Page:** View all posts from followed users and personal feed.
+- **Explore Page:** Discover trending posts across the platform.
+- **Save Posts:** Bookmark favorite posts for later viewing.
+- **Create and Edit Posts:** Post creation and editing functionalities for users.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+- Vite react
+- React query
+- Shadcn UI
+- Tailwind CSS
+- Appwrite
+
+## Installation
+
+To run Snapgram locally, follow these steps:
+
+### Clone the repository:
+
+```bash
+git clone https://github.com/taiwo-adewale/snapgram.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Navigate to the project directory:
+
+```bash
+cd snapgram
+```
+
+### Install dependencies:
+
+```bash
+npm install
+```
+
+### Start the development server:
+
+```bash
+npm run dev
+```
+
+Open your browser and visit [http://localhost:5173](http://localhost:5173) to access snapgram.
+
+## Contribution
+
+I welcome contributions from the community. If you'd like to contribute to snapgram, please follow these general guidelines:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes, ensuring clear code and comments.
+4. Submit a pull request, describing your changes in detail.
+
+## Contact
+
+For questions, feedback, or inquiries, feel free to reach out to me at [adewaletaiwo08@gmail.com](mailto:adewaletaiwo08@gmail.com).
