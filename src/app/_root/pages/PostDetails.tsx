@@ -22,7 +22,7 @@ const PostDetails = () => {
   const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
     post?.creator.$id
   );
-  const { mutate: deletePost, error: wale } = useDeletePost();
+  const { mutate: deletePost } = useDeletePost();
 
   useEffect(() => {
     if (error) {
@@ -40,10 +40,8 @@ const PostDetails = () => {
 
   const handleDeletePost = () => {
     deletePost({ postId: id, imageId: post?.imageId });
-    // navigate(-1);
+    navigate(-1);
   };
-
-  console.log(wale);
 
   return (
     <div className="post_details-container">

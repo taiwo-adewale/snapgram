@@ -1,27 +1,13 @@
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 import { INavLink } from "@/types";
 import { sidebarLinks } from "@/constants";
-import { Loader } from "@/components/shared";
-import { useSignOutAccount } from "@/lib/react-query/queries";
-import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
+import { Loader, Signout } from "@/components/shared";
+import { useUserContext } from "@/context/AuthContext";
 
 const LeftSidebar = () => {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { user, setUser, setIsAuthenticated, isLoading } = useUserContext();
-
-  const { mutate: signOut } = useSignOutAccount();
-
-  const handleSignOut = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    signOut();
-    setIsAuthenticated(false);
-    setUser(INITIAL_USER);
-    navigate("/sign-in");
-  };
+  const { user, isLoading } = useUserContext();
 
   return (
     <nav className="leftsidebar">
@@ -84,17 +70,7 @@ const LeftSidebar = () => {
       </div>
 
       <li className="leftsidebar-link group">
-        <button
-          onClick={(e) => handleSignOut(e)}
-          className="flex gap-4 items-center p-4"
-        >
-          <img
-            src="/assets/icons/logout.svg"
-            alt="logout"
-            className="group-hover:invert-white"
-          />
-          Logout
-        </button>
+        <Signout />
       </li>
     </nav>
   );
